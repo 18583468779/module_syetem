@@ -8,14 +8,15 @@ use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
+    use RefreshDatabase; //帮助我们初始化数据库
     /**
-     * A basic feature test example.
+     * 用户注册.
      */
     public function test_userRegister(): void
     {
         $response = $this->post('/api/register', [
-            'email' => '1123654052@qq.com',
-            'password' => 'aiaiai123456'
+            'email' => '112365405@qq.com',
+            'password' => 'ai11'
         ]);
 
         $response->assertStatus(201);
