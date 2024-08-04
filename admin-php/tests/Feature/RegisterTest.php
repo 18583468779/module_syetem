@@ -15,7 +15,7 @@ class RegisterTest extends TestCase
     public function test_userRegister(): void
     {
         $response = $this->post('/api/register', [
-            'email' => '112365405@qq.com',
+            'account' => '18583468779',
             'password' => 'ai11'
         ]);
 

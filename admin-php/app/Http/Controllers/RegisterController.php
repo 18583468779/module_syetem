@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
     //
-    public function __invoke(Request $request)
+    // 控制器被调用时自动执行
+    public function __invoke(RegisterRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:3'
-        ]);
-        // 控制器被调用时自动执行
+        $fieldName = filter_var($request->account, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+
         $user = User::create([
-            'email' => $request->email,
-            'password' => $request->password
+            $fieldName => $request->account,
+            'password' => Hash::make($request->password)
         ]);
 
         return $user;
