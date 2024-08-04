@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -18,12 +19,19 @@ class LoginController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        // if (!$user || Hash::check($request->password, $user->password)) {
-        //     return $request;
-        // } else {
-        //     return '登录失败';
-        // }
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'email' => '用户不存在'
+            ]);
+        }
 
-        return ['data' => $user, 'msg' => '123'];
+        if (!Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'password' => '密码输入错误'
+            ]);
+        }
+
+
+        return ['token' => $user->createToken('auth')->plainTextToken];
     }
 }
