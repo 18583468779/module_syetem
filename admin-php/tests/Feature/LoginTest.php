@@ -10,8 +10,8 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     protected $data = [
-        'email' => '1123654054@qq.com',
-        'password' => 'aiaiai123456'
+        'account' => 'o.mhtubz@gurtihfvj.ye',
+        'password' => '123456'
     ];
     /**
      * @test
