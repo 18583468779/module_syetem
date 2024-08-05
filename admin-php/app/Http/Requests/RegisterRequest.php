@@ -12,7 +12,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'account' =>  $this->accountRule(),
-            'password' => ['required', 'min:3']
+            'password' => ['required', 'min:3', 'confirmed'] // confirmed 确认密码 必须有password_confirmation字段
         ];
     }
 

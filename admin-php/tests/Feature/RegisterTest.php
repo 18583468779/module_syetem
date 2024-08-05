@@ -16,9 +16,10 @@ class RegisterTest extends TestCase
     {
         $response = $this->post('/api/register', [
             'account' => '18583468779',
-            'password' => 'ai11'
+            'password' => 'ai11',
+            'password_confirmation' => 'ai11'
         ]);
 
-        $response->assertStatus(201);
+        $response->assertOk();
     }
 }

@@ -20,6 +20,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return $user;
+        return [
+            'token' => $user->createToken('auth')->plainTextToken,
+            'flag' => 0,
+            'user' => $user
+        ];
     }
 }
