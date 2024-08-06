@@ -35,9 +35,9 @@ class EmailValidateCodeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('您的验证码是')
+            ->action('访问网站', url('/'))
+            ->line('感谢订阅我的频道!');
     }
 
     /**
