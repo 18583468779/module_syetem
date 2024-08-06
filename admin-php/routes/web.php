@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Notifications\EmailValidateCodeNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,5 +15,6 @@ Route::get('/about', function () {
 
 
 Route::get('/test', function () {
-    return (new EmailValidateCodeNotification())->toMail(User::factory()->make());
+    Notification::send(User::factory()->make(), new EmailValidateCodeNotification(1235));
+    // return (new EmailValidateCodeNotification())->toMail(User::factory()->make());
 });
