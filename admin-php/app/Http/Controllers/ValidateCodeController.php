@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidateCodeRequest;
-use App\Models\User;
-use App\Notifications\EmailValidateCodeNotification;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+
+use App\Services\CodeService;
+
 
 class ValidateCodeController extends Controller
 {
     //
-    public function guest(ValidateCodeRequest $request)
+    public function guest(ValidateCodeRequest $request, CodeService $codeService)
     {
-        Notification::send(User::factory()->make(['email' => $request->account]), new EmailValidateCodeNotification(3124));
+        $codeService->send($request->account);
     }
 }
